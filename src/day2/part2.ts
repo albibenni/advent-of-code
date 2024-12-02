@@ -124,3 +124,4 @@ function areIncreasing(report: number[]) {
 
 const input = fs.readFileSync("./src/day2/data.txt", "utf8");
 solution(input);
+//343
