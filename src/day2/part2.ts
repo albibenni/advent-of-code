@@ -81,31 +81,6 @@ function tryAgain(report: number[], i: number, increasing: boolean) {
   } else cases(nextNext, current, increasing);
 }
 
-function cases(num1: number, num2: number, increasing: boolean) {
-  const diff = num1 - num2;
-  //   console.log(diff);
-  //   console.log(num1, num2);
-
-  if (diff === 0) {
-    console.log("diff is 0");
-
-    return false;
-  }
-  if (Math.abs(diff) > 3) {
-    console.log("diff is greater than 3");
-
-    return false;
-  }
-  if (increasing !== diff > 0) {
-    console.log("not increasing");
-
-    return false;
-  }
-  console.log("safe");
-
-  return true;
-}
-
 function areIncreasing(report: number[]) {
   const isIncreasingFirst = report[0] < report[1];
   const isIncreasingSecond = report[1] < report[2];
@@ -122,6 +97,90 @@ function areIncreasing(report: number[]) {
   }
 }
 
-const input = fs.readFileSync("./src/day2/data.txt", "utf8");
-solution(input);
+//solution(input);
 //343
+
+function solution2(input: string) {
+  const reports = input.split("\n");
+  const reportMatrix = reports.map((report) =>
+    report.split(" ").map((level) => parseInt(level)),
+  );
+  let safeNumb = 0;
+  const safeReports: number[][] = [];
+  for (let y = 0; y < reportMatrix.length; y++) {
+    const report = reportMatrix[y];
+    const result = isSafe(report);
+    if (result.safe) {
+      safeNumb++;
+      safeReports.push(report);
+    } else {
+      if (result.position === report.length - 2) {
+        safeNumb++;
+        safeReports.push(report);
+      } else {
+        const newReport1 = [];
+        report?.forEach((level, index) => {
+          if (index !== result.position) {
+            newReport1.push(level);
+          }
+        });
+
+        if (isSafe(newReport1).safe) {
+          safeNumb++;
+          safeReports.push(report);
+        } else {
+          const newReport2 = [];
+          report?.forEach((level, index) => {
+            if (index !== result.position) {
+              newReport2.push(level);
+            }
+          });
+          newReport2.splice(result.position + 1, 1);
+          if (isSafe(newReport2).safe) {
+            safeNumb++;
+            safeReports.push(report);
+          }
+        }
+      }
+    }
+  }
+  console.log(safeNumb);
+  console.log(safeReports);
+}
+
+function isSafe(report: number[]): { safe: boolean; position: number } {
+  const increasing = report[0] < report[1];
+  let safe = true;
+  let position = 0;
+  //@ts-ignore
+  for (let i = 0; i < report.length - 1; i++) {
+    //@ts-ignore
+    const res = cases(report[i + 1], report[i], increasing);
+    if (res) {
+      continue;
+    } else {
+      safe = false;
+      position = i;
+      break;
+    }
+  }
+  return { safe, position };
+}
+
+function cases(num1: number, num2: number, increasing: boolean) {
+  const diff = num1 - num2;
+
+  if (diff === 0) {
+    return false;
+  }
+  if (Math.abs(diff) > 3) {
+    return false;
+  }
+  if (increasing !== diff > 0) {
+    return false;
+  }
+  return true;
+}
+
+const input = fs.readFileSync("./src/day2/data.txt", "utf8");
+solution2(input);
