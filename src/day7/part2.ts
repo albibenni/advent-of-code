@@ -20,6 +20,20 @@ const input = fs
   .toString()
   .split("\n");
 
+/** 
+  The main function calc takes two parameters:
+
+permutation: A string representing a sequence of operators (*, +, or |)
+numbers: An array of numbers to operate on
+The function implements a calculator that processes these operations sequentially. It starts with the first number from the array as the initial result and then iterates through the permutation string. For each operator in the permutation:
+
+If it's *, it multiplies the current result by the next number
+If it's +, it adds the next number to the current result
+If it's |, it performs a concatenation operation by converting both numbers to strings, joining them, and converting back to a number (e.g., 1 | 2 becomes 12)
+Based on the comment above the code, this appears to be solving a puzzle where you need to find valid equations that can be formed using these operators. The puzzle mentions "elephant hiding spots" and requires calculating a "calibration result" by summing up values from valid equations.
+
+The use of TypeScript's strict nullability is evident with the ! operators, indicating that the code assumes result and currentNumber will never be null or undefined during execution
+*/
 const calc = (permutation: string, numbers: number[]) => {
   let result = numbers[0];
   let numberIndex = 1;
