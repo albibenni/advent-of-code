@@ -177,9 +177,9 @@ function solution(input: ReturnType<typeof readInput>) {
   for (const key of map.keys()) {
     const list = getListOfPair(key, map);
     list.forEach((pair) => {
-      const { originAnt: org, destAnt: dst, dx, dy } = pair;
-      const antenna1 = { x: org.x - dx, y: org.y - dy };
-      const antenna2 = { x: dst.x + dx, y: dst.y + dy };
+      const { originAnt, destAnt, dx, dy } = pair;
+      const antenna1 = { x: originAnt.x - dx, y: originAnt.y - dy };
+      const antenna2 = { x: destAnt.x + dx, y: destAnt.y + dy };
       if (
         antenna1.x >= 0 &&
         antenna1.x < WIDTH &&
