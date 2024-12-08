@@ -76,18 +76,6 @@ Calculate the impact of the signal. How many unique locations within the bounds 
 */
 import fs from "fs";
 
-/*
-Parse the input building the list of antenna into an hasmap, 
-- build list of pairs for each type of antenna, 
-- then for each pair calculate the distance between 2 nodes (n2.x - n1.x),(n2.y - n1.y),
-- for part 1 subtract or add the distance to each node of the pair, 
-- for part 2 do that as long as you stay in the bounds of the map.
-
-You have to read the text carefully for part 2: 
-- After updating your model, it turns out that an antinode occurs at any grid position exactly in line with at least two antennas of the same frequency, regardless of distance. 
-- This means that some of the new antinodes will occur at the position of each antenna (unless that antenna is the only one of its frequency). 
-- I couldn't figure out why the first example has 9 and not only 6 ...
-*/
 export const input = "./src/day8/data.txt";
 export const inputd = "./src/day8/dummy.txt";
 
