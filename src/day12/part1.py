@@ -1,7 +1,6 @@
 from collections import deque
 
 grid = [list(line.strip()) for line in open("./src/day12/data.txt")]
-print(grid)
 
 rows = len(grid)
 cols = len(grid[0])
@@ -14,7 +13,7 @@ for r in range(rows):
         if (r, c) in seen:
             continue
         seen.add((r, c))
-        region = set()
+        region = {(r, c)}
         q = deque([(r, c)])
         crop = grid[r][c]
         while q:
