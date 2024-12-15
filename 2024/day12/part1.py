@@ -1,6 +1,6 @@
 from collections import deque
 
-grid = [list(line.strip()) for line in open("./src/day12/data.txt")]
+grid = [list(line.strip()) for line in open("./2024/day12/data.txt")]
 
 rows = len(grid)
 cols = len(grid[0])
